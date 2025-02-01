@@ -75,8 +75,9 @@ public:
 	bool point_right = true;//判断人物朝向变量
 
 	//判断动作是否还在进行
-	bool atk_2_ing = false;//W + U
-	bool atk_1_ing = false;//U
+	int atk_2_ing = 0;//j
+	int atk_1_ing = 0;//j
+	int atk_time = 0;
 	bool j_up_ing = false;//上升
 	bool j_down_ing = false;//下落
 	bool take_hit_ing = false;
@@ -88,14 +89,22 @@ public:
 
 	bool idle_ing = true;
 
-	unsigned int start_time;
-	unsigned int end_time;
+	//sound
+	int no_run_sound = 0;
+	int no_attack_impact1 = 0;
+	int no_attack_impact2 = 0;
+	int no_attack1 = 0;
+	int no_attack2 = 0;
 
 	POINT enemy_point = { 200, 500 };
 	int XSPEED = 13;
 	int YSPEED = 0;
 	const int height = 500;
 	const int g = 3;
+
+	bool is_run_audio_playing = false;
+	//生命值
+	int HP = 200;
 private:
 	int _IDLE;
 	int _RUN;

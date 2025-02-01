@@ -113,14 +113,14 @@ public:
 	bool j_down_ing = false;//下落
 	bool tumble_ing = false;//L
 	bool heal_ing = false;//O
-	bool take_hit_ing = false;
+	int take_hit_ing = 0;
 	bool death_ing = false;
 	bool air_ing = false;//空中J
 
 	bool idle_ing = true;
 
-	unsigned int start_time;
-	unsigned int end_time;
+
+	POINT enemy_point = { 900, 355 };
 
 private:
 	//动画帧数
@@ -139,8 +139,6 @@ private:
 	int _TAKE_HIT;
 	int _DEATH;
 	int _AIR_ATK;
-
-	POINT enemy_point = { 900, 300 };
 
 
 

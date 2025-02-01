@@ -29,6 +29,7 @@ Player::Player(int IDLE, int RUN, int J_UP, int J_DOWN, int LAND, int ATK_1, int
 
 	load_death();
 	load_take_hit();
+
 }
 
 Player::~Player()
@@ -38,12 +39,40 @@ Player::~Player()
 
 void Player::load_attack_1()
 {
-
+	//加载attack_1
+	for (int i = 0; i < _ATK_1; i++)
+	{
+		std::wstring path = L"./image_source/player/Attack1/" + std::to_wstring(i + 1) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 150, 150, true);
+		img_attack_1_right.push_back(img);
+	}
+	for (int i = 0; i < _ATK_1; i++)
+	{
+		std::wstring path = L"./image_source/player/Attack1/0" + std::to_wstring(i + 1) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 150, 150, true);
+		img_attack_1_left.push_back(img);
+	}
 }
 
 void Player::load_attack_2()
 {
-
+	//加载attack_2
+	for (int i = 0; i < _ATK_1; i++)
+	{
+		std::wstring path = L"./image_source/player/Attack2/" + std::to_wstring(i + 1) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 150, 150, true);
+		img_attack_2_right.push_back(img);
+	}
+	for (int i = 0; i < _ATK_1; i++)
+	{
+		std::wstring path = L"./image_source/player/Attack2/0" + std::to_wstring(i + 1) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 150, 150, true);
+		img_attack_2_left.push_back(img);
+	}
 }
 
 void Player::load_idle()
@@ -151,12 +180,40 @@ void Player::load_run()
 
 void Player::load_death()
 {
-
+	//加载death
+	for (int i = 0; i < _DEATH; i++)
+	{
+		std::wstring path = L"./image_source/player/Death/" + std::to_wstring(i + 1) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 150, 150, true);
+		img_death_right.push_back(img);
+	}
+	for (int i = 0; i < _DEATH; i++)
+	{
+		std::wstring path = L"./image_source/player/Death/0" + std::to_wstring(i + 1) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 150, 150, true);
+		img_death_left.push_back(img);
+	}
 }
 
 void Player::load_take_hit()
 {
-
+	//加载take_hit
+	for (int i = 0; i < _TAKE_HIT; i++)
+	{
+		std::wstring path = L"./image_source/player/Hit/" + std::to_wstring(i + 1) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 150, 150, true);
+		img_take_hit_right.push_back(img);
+	}
+	for (int i = 0; i < _TAKE_HIT; i++)
+	{
+		std::wstring path = L"./image_source/player/Hit/0" + std::to_wstring(i + 1) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 150, 150, true);
+		img_take_hit_left.push_back(img);
+	}
 }
 
 void Player::load_dash()
@@ -200,12 +257,20 @@ void Player::put_run()
 
 void Player::put_attack_1()
 {
-
+	static int time = 0;
+	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_attack_1_right[time]);
+	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_attack_1_left[time]);
+	time++;
+	if (time == _ATK_1)time = 0;
 }
 
 void Player::put_attack_2()
 {
-
+	static int time = 0;
+	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_attack_2_right[time]);
+	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_attack_2_left[time]);
+	time++;
+	if (time == _ATK_2)time = 0;
 }
 
 void Player::put_j_up()
@@ -237,24 +302,22 @@ void Player::put_land()
 
 void Player::put_take_hit()
 {
-
+	static int time = 0;
+	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_take_hit_right[time]);
+	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_take_hit_left[time]);
+	time++;
+	if (time == _TAKE_HIT)time = 0;
 }
 
 void Player::put_death()
 {
-
+	static int time = 0;
+	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_death_right[time]);
+	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_death_left[time]);
+	time++;
+	if (time == _DEATH)time = 0;
 }
 
-
-void Player::change_data()
-{
-
-}
-
-void Player::player_action()
-{
-
-}
 
 void Player::put_dash()
 {

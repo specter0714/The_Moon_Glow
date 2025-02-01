@@ -322,7 +322,7 @@ void Enemy_water::load_take_hit()
 	{
 		for (int i = 0; i < _TAKE_HIT; i++)
 		{
-			std::wstring path = L"./image_source/water/take_hit/take_hit_" + std::to_wstring(i + 1) + L".png";
+			std::wstring path = L"./image_source/water/take_hit/take_hit_1.png" + std::to_wstring(i + 1) + L".png";
 			IMAGE img;
 			loadimage(&img, path.c_str(), 576, 256, true);
 			img_take_hit_right.push_back(img);
@@ -405,10 +405,10 @@ void Enemy_water::put_sp_attack()
 void Enemy_water::put_walk()
 {
 	static int time = 0;
-	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_idle_right[time / 2]);
-	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_idle_left[time / 2]);
+	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_idle_right[time]);
+	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_idle_left[time]);
 	time++;
-	if (time / 2 == _WALK)time = 0;
+	if (time == _WALK)time = 0;
 }
 
 void Enemy_water::put_surf()
@@ -495,10 +495,10 @@ void Enemy_water::put_defend()
 void Enemy_water::put_take_hit()
 {
 	static int time = 0;
-	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_idle_right[time / 2]);
-	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_idle_left[time / 2]);
+	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_take_hit_right[time]);
+	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_take_hit_left[time]);
 	time++;
-	if (time / 2 == _IDLE)time = 0;
+	if (time == _TAKE_HIT)time = 0;
 }
 
 void Enemy_water::put_death()
@@ -519,14 +519,3 @@ void Enemy_water::put_air_attack()
 	if (time / 2 == _IDLE)time = 0;
 }
 
-
-
-void Enemy_water::change_data()
-{
-	
-}
-
-void Enemy_water::player_action()
-{
-
-}
