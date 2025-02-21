@@ -30,6 +30,10 @@ Player::Player(int IDLE, int RUN, int J_UP, int J_DOWN, int LAND, int ATK_1, int
 	load_death();
 	load_take_hit();
 
+	load_hp();
+
+	load_start();
+
 }
 
 Player::~Player()
@@ -211,7 +215,7 @@ void Player::load_take_hit()
 	{
 		std::wstring path = L"./image_source/player/Hit/0" + std::to_wstring(i + 1) + L".png";
 		IMAGE img;
-		loadimage(&img, path.c_str(), 150, 150, true);
+		loadimage(&img, path.c_str(), 150, 150, true);  
 		img_take_hit_left.push_back(img);
 	}
 }
@@ -235,6 +239,35 @@ void Player::load_dash()
 	}
 }
 
+
+void Player::load_hp()
+{
+	//º”‘ÿhp
+	for (int i = 0; i < 6; i++)
+	{
+		std::wstring path = L"./image_source/hp/" + std::to_wstring(i) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 188, 174, true);
+		img_hp.push_back(img);
+	}
+	
+}
+
+void Player::load_start()
+{
+	//º”‘ÿstart
+	for (int i = 0; i < 3; i++)
+	{
+		std::wstring path = L"./image_source/player/stare/" + std::to_wstring(i + 1) + L".png";
+		IMAGE img;
+		loadimage(&img, path.c_str(), 550, 550, true);
+		img_start.push_back(img);
+	}
+	std::wstring path = L"./image_source/player/stare/2.png";
+	IMAGE img;
+	loadimage(&img, path.c_str(), 550, 550, true);
+	img_start.push_back(img);
+}
 
 
 void Player::put_idle()
@@ -312,10 +345,10 @@ void Player::put_take_hit()
 void Player::put_death()
 {
 	static int time = 0;
-	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_death_right[time]);
-	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_death_left[time]);
+	if (point_right)Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_death_right[time / 40]);
+	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_death_left[time / 40]);
 	time++;
-	if (time == _DEATH)time = 0;
+	if (time / 40 == _DEATH)time = 0;
 }
 
 
@@ -326,4 +359,17 @@ void Player::put_dash()
 	else Putimage_alpha::putimage_alpha(enemy_point.x, enemy_point.y, &img_dash_left[time]);
 	time++;
 	if (time == _DASH)time = 0;
+}
+
+void Player::put_hp()
+{
+	Putimage_alpha::putimage_alpha(0, 10, &img_hp[HP]);
+}
+
+void Player::put_start()
+{
+	static int time = 0;
+	Putimage_alpha::putimage_alpha(-70, 170, &img_start[time / 23]);
+	time++;
+	if (time / 23 == _START)time = 0;
 }

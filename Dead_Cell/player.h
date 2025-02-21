@@ -16,6 +16,10 @@ public:
 	void load_death();
 	void load_take_hit();
 
+	void load_hp();
+
+	void load_start();
+
 	//渲染图片
 	void put_idle();
 	void put_run();
@@ -29,10 +33,9 @@ public:
 	void put_take_hit();
 	void put_death();
 
+	void put_hp();
 
-	void change_data();
-
-	void player_action();
+	void put_start();
 
 	//使用vector来取代传统数组来储存，
 	std::vector<IMAGE> img_idle_left;
@@ -65,6 +68,9 @@ public:
 	std::vector<IMAGE> img_dash_right;
 	std::vector<IMAGE> img_dash_left;
 
+	std::vector<IMAGE> img_hp;
+
+	std::vector<IMAGE> img_start;
 
 	//判断在这一帧中，有无键盘A,D信息
 	bool is_move_left = false;//A
@@ -80,12 +86,14 @@ public:
 	int atk_time = 0;
 	bool j_up_ing = false;//上升
 	bool j_down_ing = false;//下落
-	bool take_hit_ing = false;
 	bool death_ing = false;
 	int dash_ing = 0;//dash
 
 	int no_dash = 0;//no_dash
 	int dash_count = 0;//dash_count
+
+	int no_enemy_time = 0;//无敌时间
+	int take_hit_ing = 0;//受击
 
 	bool idle_ing = true;
 
@@ -97,14 +105,17 @@ public:
 	int no_attack2 = 0;
 
 	POINT enemy_point = { 200, 500 };
-	int XSPEED = 13;
+	int XSPEED = 9;
 	int YSPEED = 0;
 	const int height = 500;
 	const int g = 3;
 
 	bool is_run_audio_playing = false;
 	//生命值
-	int HP = 200;
+	int HP = 5;
+
+	//start
+	int start = 0;
 private:
 	int _IDLE;
 	int _RUN;
@@ -116,4 +127,6 @@ private:
 	int _TAKE_HIT;
 	int _DEATH;
 	int _DASH;
+
+	int _START = 4;
 };

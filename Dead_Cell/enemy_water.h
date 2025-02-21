@@ -104,8 +104,7 @@ public:
 	bool point_right = false;//判断人物朝向变量
 
 	//判断动作是否还在进行
-	bool sp_atk_ing = false;//S + O
-	bool surf_ing = false;//I
+	int surf_ing = 0;//I
 	bool atk_3_ing = false;//S + U
 	bool atk_2_ing = false;//W + U
 	bool atk_1_ing = false;//U
@@ -113,14 +112,21 @@ public:
 	bool j_down_ing = false;//下落
 	bool tumble_ing = false;//L
 	bool heal_ing = false;//O
+
 	int take_hit_ing = 0;
 	bool death_ing = false;
 	bool air_ing = false;//空中J
 
 	bool idle_ing = true;
 
+	int sp_attack = 0;
+
 
 	POINT enemy_point = { 900, 355 };
+
+	int HP = 200;
+	int act_time = 0;
+	const int S_SPEED = 20;
 
 private:
 	//动画帧数

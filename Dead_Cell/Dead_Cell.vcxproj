@@ -24,6 +24,7 @@
     <ProjectGuid>{3daa5f14-636b-4085-a889-da77413d66f0}</ProjectGuid>
     <RootNamespace>DeadCell</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>The_Moon_Glow</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -132,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="background.cpp" />
     <ClCompile Include="BOOS.cpp" />
+    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="core.cpp" />
     <ClCompile Include="enemy_water.cpp" />
     <ClCompile Include="player.cpp" />
@@ -139,6 +141,7 @@
   <ItemGroup>
     <ClInclude Include="background.h" />
     <ClInclude Include="BOOS.h" />
+    <ClInclude Include="bullet.h" />
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="enemy_base.h" />
     <ClInclude Include="enemy_water.h" />
