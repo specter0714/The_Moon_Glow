@@ -2,4 +2,4 @@
 
 This is a dark-style game.
 
-![图片](Dead_Cell/image_source/player/stare/3.png)
+![图片](Dead_Cell/image_source/player/stare/1.png)
