@@ -134,8 +134,6 @@ int main()
 		}
 
 		background.put_background();
-
-
 		player.put_start();
 
 
@@ -154,6 +152,10 @@ int main()
 			background.put_ui1();
 		}
 
+		background.put_text();
+
+
+
 
 		if (check2) {
 			count_time++;
@@ -166,7 +168,7 @@ int main()
 
 
 
-		end_time = GetTickCount();//获取这一帧结束时间
+		end_time = GetTickCount64();//获取这一帧结束时间
 		unsigned long delta_time = end_time - start_time;
 
 		//计时器，使每一帧的时间是一样的
@@ -177,7 +179,7 @@ int main()
 
 		FlushBatchDraw();
 
-		start_time = GetTickCount();//这一帧开始时间
+		start_time = GetTickCount64();//这一帧开始时间
 	}
 	EndBatchDraw();
 
@@ -339,22 +341,23 @@ int main()
 				water.HP--;
 			}
 		}
-		if (abs(dif) <= 30 && !player.no_enemy_time && !player.take_hit_ing && dif_h >= -50) {
+
+
+		if (abs(dif) <= 30 && !player.no_enemy_time && !player.take_hit_ing && !player.take_hit_ing_serious && dif_h >= -50) {
 			player.take_hit_ing = 6;
 			player.no_enemy_time = 70;
 		}
-		if (abs(dif_bullet) <= 40 && !player.no_enemy_time && !player.take_hit_ing && abs(dif_bullet_h) <= 150) {
+		if (abs(dif_bullet) <= 40 && !player.no_enemy_time && !player.take_hit_ing && !player.take_hit_ing_serious && abs(dif_bullet_h) <= 150) {
 			player.take_hit_ing = 6;
 			player.no_enemy_time = 70;
 		}
-		if (water.sp_attack <= 20 && water.sp_attack >= 4) {
+		if (water.sp_attack <= 20 && water.sp_attack >= 4 && !player.no_enemy_time && !player.take_hit_ing && !player.take_hit_ing_serious) {
 			if (water.point_right && player_xx >= water_xx && player_xx <= water_xx + 192) {
-				player.take_hit_ing = 6;
+				player.take_hit_ing_serious = 6;
 				player.no_enemy_time = 70;
-				std::cout << "kkkk";
 			}
-			else if(player_xx <= water_xx && player_xx >= water_xx - 192){
-				player.take_hit_ing = 6;
+			else if(player_xx <= water_xx && player_xx >= water_xx - 192 && !player.no_enemy_time && !player.take_hit_ing && !player.take_hit_ing_serious){
+				player.take_hit_ing_serious = 6;
 				player.no_enemy_time = 70;
 			}
 		}
@@ -544,11 +547,12 @@ int main()
 				}
 			}
 		}
-		else if (player.take_hit_ing) {//player受到攻击
+		else if (player.take_hit_ing || player.take_hit_ing_serious) {//player受到攻击
 			player.dash_ing = 0;
 			player.atk_1_ing = 0;
 			player.atk_2_ing = 0;
 			if (player.take_hit_ing == 6)player.HP--;
+			if (player.take_hit_ing_serious == 6)player.HP -= 2;
 			if (water.surf_ing) {
 				if (dif >= 0) {
 					player.enemy_point.x += 60;
@@ -621,7 +625,7 @@ int main()
 		else if (water.HP <= 0 && water_time <= 10) {
 			player.put_take_hit();
 		}
-		else if (player.take_hit_ing) {
+		else if (player.take_hit_ing || player.take_hit_ing_serious) {
 			player.put_take_hit();
 		}
 		else if (player.dash_ing) {
@@ -711,6 +715,9 @@ int main()
 		if (player.no_enemy_time) {
 			player.no_enemy_time--;
 		}
+		if (player.take_hit_ing_serious) {
+			player.take_hit_ing_serious--;
+		}
 
 		if (player.HP <= 0) {
 			player_time++;
@@ -738,7 +745,7 @@ int main()
 		water.act_time++;
 
 
-		end_time = GetTickCount();//获取这一帧结束时间
+		end_time = GetTickCount64();//获取这一帧结束时间
 		unsigned long delta_time = end_time - start_time;
 
 		//计时器，使每一帧的时间是一样的
@@ -749,7 +756,7 @@ int main()
 		
 		FlushBatchDraw();
 
-		start_time = GetTickCount();//这一帧开始时间
+		start_time = GetTickCount64();//这一帧开始时间
 	}
 	EndBatchDraw();
 
