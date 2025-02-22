@@ -94,6 +94,7 @@ public:
 
 	int no_enemy_time = 0;//无敌时间
 	int take_hit_ing = 0;//受击
+	int take_hit_ing_serious = 0;
 
 	bool idle_ing = true;
 
